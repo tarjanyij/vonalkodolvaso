@@ -2,6 +2,7 @@ package com.tarjanyi.vonalkodolvaso
 
 import android.Manifest
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Vibrator
@@ -12,6 +13,8 @@ import androidx.core.content.ContextCompat
 import com.google.zxing.Result
 import com.tarjanyi.vonalkodolvaso.R.layout.activity_main
 import me.dm7.barcodescanner.zxing.ZXingScannerView
+
+
 
 class MainActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
     private val REQUEST_CAMERA = 1
@@ -51,8 +54,9 @@ class MainActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
     }
 
     override fun onDestroy() {
-        super.onDestroy()
         scannerView?.stopCamera()
+        super.onDestroy()
+
     }
     override fun handleResult(p0: Result?) {
         val result:String? = p0?.text
@@ -60,17 +64,12 @@ class MainActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
         /*vibrator.vibrate( 100)*/
         txtResult?.text = result
         scannerView?.setResultHandler(this)
-        scannerView?.startCamera()
 
-        /*val builder = android.app.AlertDialog.Builder(this)
-        builder.setTitle("Result")
-        builder.setPositiveButton("OK") {dialog,which ->
-            scannerView?.resumeCameraPreview (this@MainActivity)
-            startActivity(intent)
-        }
-        builder.setMessage(result)
-        val alertDialog = builder.create()
-        alertDialog.show()*/
+        val intent = Intent(this, DataPublisher::class.java)
+        intent.putExtra("BAR_CODE",result)
+        startActivity(intent)
+
+        /*scannerView?.startCamera()*/
 
     }
 }
