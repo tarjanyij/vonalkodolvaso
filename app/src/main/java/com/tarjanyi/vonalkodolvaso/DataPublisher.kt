@@ -1,19 +1,22 @@
 package com.tarjanyi.vonalkodolvaso
 
 import android.os.Bundle
-import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
 
 class DataPublisher : AppCompatActivity() {
     private var barcode : TextView? = null
+    private var btnNewScan : Button? =null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_data_publisher)
 
         barcode = findViewById(R.id.barcode)
+        btnNewScan =findViewById(R.id.btnNewScan)
+
 
     }
 
@@ -24,9 +27,9 @@ class DataPublisher : AppCompatActivity() {
         val codeString:String?= intent.getStringExtra("BAR_CODE")
         barcode?.text = "A leolvasott kód:"+codeString
 
+        btnNewScan?.setOnClickListener { finish() }
+
     }
 
-    fun newScan(view: View) {
-        finish()
-    }
+
 }

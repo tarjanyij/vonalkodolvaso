@@ -4,7 +4,9 @@ import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
+import android.os.VibrationEffect
 import android.os.Vibrator
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -61,12 +63,17 @@ class MainActivity : AppCompatActivity(), ZXingScannerView.ResultHandler {
     override fun handleResult(p0: Result?) {
         val result:String? = p0?.text
         val vibrator = applicationContext.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-        /*vibrator.vibrate( 100)*/
+        if (Build.VERSION.SDK_INT >= 26) {
+            vibrator.vibrate(VibrationEffect.createOneShot(200, VibrationEffect.DEFAULT_AMPLITUDE))
+        } else {
+            vibrator.vibrate(200)
+        }
         txtResult?.text = result
         scannerView?.setResultHandler(this)
 
         val intent = Intent(this, DataPublisher::class.java)
         intent.putExtra("BAR_CODE",result)
+        txtResult?.text = null
         startActivity(intent)
 
         /*scannerView?.startCamera()*/

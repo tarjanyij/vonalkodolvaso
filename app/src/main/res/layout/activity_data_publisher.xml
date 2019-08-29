@@ -16,11 +16,11 @@
             android:layout_weight="1"
             />
     <Button
-            android:id="@+id/new_scan"
+            android:id="@+id/btnNewScan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="new scan"
-            android:onClick="newScan"
+            android:text="Új beolvasás"
+
             >
     </Button>
 
