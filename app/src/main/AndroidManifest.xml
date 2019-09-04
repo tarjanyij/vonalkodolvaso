@@ -20,6 +20,7 @@
         <activity
                 android:name=".DataPublisher"
                 android:screenOrientation="portrait">
+
         </activity>
         <activity
                 android:name=".MainActivity"

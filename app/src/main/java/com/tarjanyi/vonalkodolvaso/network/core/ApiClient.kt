@@ -1,4 +1,4 @@
-package com.tarjanyi.vonalkodolvaso.Network.Core
+package com.tarjanyi.vonalkodolvaso.network.core
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
